@@ -3,7 +3,8 @@ import { View, ToastAndroid, Text, Image } from 'react-native';
 import { Button } from '@ant-design/react-native';
 import { flyPost } from './common/js/fetch'
 import Alipay from 'react-native-yunpeng-alipay';
-import BlurImage from 'react-native-blur-image'
+import RNFileSelector from 'react-native-file-selector';
+import ImagePicker from 'react-native-image-crop-picker';
 
 export default class PopupExample extends React.Component {
   constructor(props) {
@@ -31,16 +32,37 @@ export default class PopupExample extends React.Component {
     });
   }
 
+  upLoadFile () {
+    RNFileSelector.Show(
+      {
+        title: 'Select File',
+        onDone: (path) => {
+          console.log('file selected: ' + path)
+        },
+        onCancel: () => {
+          console.log('cancelled')
+        }
+      }
+    )
+  }
+
+  upLoadImg () {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+    });
+  }
+
   render() {
     return (
       <View>
-        <Button onPress={() => {this.pay()}} type="primary">支付</Button>
+        <Button onPress={() => {this.pay()}} type="primary">支付宝支付</Button>
+        <Button onPress={() => {this.upLoadFile()}}>上传文件</Button>
+        <Button onPress={() => {this.upLoadImg()}}>上传图片</Button>
         <Text>{this.state.msg}</Text>
-        {/*<BlurImage*/}
-          {/*source={{uri:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1577759731,3108671782&fm=27&gp=0.jpg'}}*/}
-          {/*style={{width: 147, height: 77 }}*/}
-          {/*blurRadius={100}*/}
-        {/*/>*/}
       </View>
     );
   }

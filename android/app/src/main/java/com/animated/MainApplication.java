@@ -3,8 +3,6 @@ package com.animated;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.aigegou.blur.BlurImageViewPackage;
-import com.cmcewen.blurview.BlurViewPackage;
 import com.yunpeng.alipay.AlipayPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import ui.fileselector.RNFileSelectorPackage;
@@ -28,7 +26,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new BlurImageViewPackage(),
             new AlipayPackage(),
             new PickerPackage(),
             new RNFileSelectorPackage()
